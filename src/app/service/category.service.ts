@@ -11,14 +11,14 @@ export class CategoryService {
     private readonly categoryRepository: Repository<Category>,
   ) {}
 
-  create(createCategoryDto: CreateCategoryDto): Promise<Category> {
+  public create(createCategoryDto: CreateCategoryDto): Promise<Category> {
     const category = new Category();
     category.name = createCategoryDto.name;
 
     return this.categoryRepository.save(category);
   }
 
-  findById(id: number): Promise<Category | null> {
+  public findById(id: number): Promise<Category | null> {
     return this.categoryRepository.findOneBy({ id: id });
   }
 }

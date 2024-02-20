@@ -9,6 +9,7 @@ import { CategoryController } from './controller/category.controller';
 import { ProductController } from './controller/product.controller';
 import { DatabaseModule } from './module/database.module';
 import { InterceptModule } from './module/interceptor.module';
+import { SkuExistsRule } from './dto/rule/sku-exists.rule';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -17,6 +18,6 @@ import { InterceptModule } from './module/interceptor.module';
     TypeOrmModule.forFeature([Product, Category]),
   ],
   controllers: [CategoryController, ProductController],
-  providers: [CategoryService, ProductService],
+  providers: [SkuExistsRule, CategoryService, ProductService],
 })
 export class AppModule {}
