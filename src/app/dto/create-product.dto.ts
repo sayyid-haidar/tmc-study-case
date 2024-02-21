@@ -1,8 +1,16 @@
-import { IsNotEmpty, IsOptional, IsPositive, MaxLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsPositive,
+  MaxLength,
+  Validate,
+} from 'class-validator';
+import { SkuExistsRule } from './rule/sku-exists.rule';
 
 export class CreateProductDto {
   @IsNotEmpty({ message: 'sku is empty' })
   @MaxLength(255, { message: 'sku length must not more than 255 characters' })
+  @Validate(SkuExistsRule)
   sku: string;
 
   @IsNotEmpty({ message: 'name is empty' })

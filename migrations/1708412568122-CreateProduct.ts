@@ -6,7 +6,7 @@ import {
 } from 'typeorm';
 
 export class CreateProduct1708412568122 implements MigrationInterface {
-  public async up(queryRunner: QueryRunner): Promise<void> {
+  async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: 'products',
@@ -60,7 +60,7 @@ export class CreateProduct1708412568122 implements MigrationInterface {
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {
+  async down(queryRunner: QueryRunner): Promise<void> {
     const table = await queryRunner.getTable('products');
     const foreignKey = table.foreignKeys.find(
       (fk) => fk.columnNames.indexOf('category_id') !== -1,

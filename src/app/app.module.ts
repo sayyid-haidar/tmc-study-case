@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { Product } from './entity/product.entity';
 import { Category } from './entity/category.entity';
 import { ConfigModule } from '@nestjs/config';
@@ -10,6 +10,8 @@ import { ProductController } from './controller/product.controller';
 import { DatabaseModule } from './module/database.module';
 import { InterceptModule } from './module/interceptor.module';
 import { SkuExistsRule } from './dto/rule/sku-exists.rule';
+import { ApiKeyMiddleware } from './middleware/apikey.middleware';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -20,4 +22,8 @@ import { SkuExistsRule } from './dto/rule/sku-exists.rule';
   controllers: [CategoryController, ProductController],
   providers: [SkuExistsRule, CategoryService, ProductService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(ApiKeyMiddleware).forRoutes('*');
+  }
+}

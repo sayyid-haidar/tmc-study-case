@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  nestjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+      MYSQL_DATABASE: tmc
+      API_KEY: NIATIKHLA5
+
+  mysql:
+    image: mysql:8
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: tmc
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping"]
+      timeout: 5s
+      retries: 5

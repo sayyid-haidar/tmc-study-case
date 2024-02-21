@@ -11,7 +11,7 @@ export default new DataSource({
   host: configService.getOrThrow('MYSQL_HOST'),
   port: configService.getOrThrow('MYSQL_PORT'),
   database: configService.getOrThrow('MYSQL_DATABASE'),
-  username: configService.getOrThrow('MYSQL_USERNAME'),
+  username: configService.getOrThrow('MYSQL_USER'),
   password: configService.getOrThrow('MYSQL_PASSWORD'),
   migrations: ['migrations/**'],
 });

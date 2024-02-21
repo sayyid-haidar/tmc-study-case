@@ -14,7 +14,7 @@ export class ProductService {
     private readonly categoryService: CategoryService,
   ) {}
 
-  public async create(createProductDto: CreateProductDto): Promise<Product> {
+  async create(createProductDto: CreateProductDto): Promise<Product> {
     const product = new Product();
     product.sku = createProductDto.sku;
     product.name = createProductDto.name;
@@ -34,13 +34,13 @@ export class ProductService {
     return this.productRepository.save(product);
   }
 
-  public findOneBy(productQuery: ProductQuery): Promise<Product> {
+  findOneBy(productQuery: ProductQuery): Promise<Product> {
     const queryBuilder = this.generateQueryBuilder(productQuery);
 
     return queryBuilder.getOne();
   }
 
-  public findAllBy(productQuery: ProductQuery): Promise<[Product[], number]> {
+  findAllBy(productQuery: ProductQuery): Promise<[Product[], number]> {
     const queryBuilder = this.generateQueryBuilder(productQuery);
 
     return queryBuilder
