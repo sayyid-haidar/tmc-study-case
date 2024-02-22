@@ -26,7 +26,7 @@ execuite command
 ```cmd
 npm install
 
-npm migration:run
+npm run migration:run
 
-npm start
+npm run start
 ```
