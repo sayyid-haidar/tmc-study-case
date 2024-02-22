@@ -99,7 +99,9 @@ export class ProductService {
     if (productQuery.page == null || productQuery.page < 1) {
       productQuery.page = 1;
     }
-    if (productQuery.pageSize == null || productQuery.pageSize < 1) {
+    if (productQuery.pageSize == null) {
+      productQuery.pageSize = 10;
+    } else if (productQuery.pageSize < 1) {
       productQuery.pageSize = 1;
     }
 

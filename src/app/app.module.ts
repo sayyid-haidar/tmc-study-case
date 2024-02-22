@@ -11,6 +11,7 @@ import { DatabaseModule } from './module/database.module';
 import { InterceptModule } from './module/interceptor.module';
 import { SkuExistsRule } from './dto/rule/sku-exists.rule';
 import { ApiKeyMiddleware } from './middleware/apikey.middleware';
+import { SearchController } from './controller/search.controller';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { ApiKeyMiddleware } from './middleware/apikey.middleware';
     InterceptModule,
     TypeOrmModule.forFeature([Product, Category]),
   ],
-  controllers: [CategoryController, ProductController],
+  controllers: [CategoryController, ProductController, SearchController],
   providers: [SkuExistsRule, CategoryService, ProductService],
 })
 export class AppModule implements NestModule {

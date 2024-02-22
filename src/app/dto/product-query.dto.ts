@@ -1,15 +1,10 @@
 import { Expose } from 'class-transformer';
-import { IsNotEmpty, Min } from 'class-validator';
 
 export class ProductQuery {
-  @Min(1)
-  @IsNotEmpty()
   page?: number = 1;
 
-  @Min(1)
-  @IsNotEmpty()
   @Expose({ name: 'page.size' })
-  pageSize?: number = 1;
+  pageSize?: number = 10;
 
   sku?: string;
 

@@ -1,4 +1,4 @@
-import { Controller, Post, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ProductService } from 'src/app/service/product.service';
 import { DataResponse } from '../dto/data-response.dto';
 import { Product } from '../entity/product.entity';
@@ -10,7 +10,7 @@ import { ProductQuery } from '../dto/product-query.dto';
 export class SearchController {
   constructor(private readonly productService: ProductService) {}
 
-  @Post()
+  @Get()
   async search(
     @Query() productQuery: ProductQuery,
   ): Promise<DataResponse<Product[]>> {
@@ -21,7 +21,11 @@ export class SearchController {
 
     return new DataAndPagingResponse(
       productData[0],
-      new Paging(productQuery.pageSize, totalPage, productQuery.page),
+      new Paging(
+        Number(productQuery.pageSize),
+        Math.ceil(totalPage),
+        productQuery.page,
+      ),
     );
   }
 }
