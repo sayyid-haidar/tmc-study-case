@@ -10,24 +10,24 @@ import { Category } from './category.entity';
 @Entity({ name: 'products' })
 export class Product {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column({ length: 255, unique: true })
-  sku: string;
+  sku?: string;
 
   @Column({ length: 255 })
-  name: string;
+  name?: string;
 
   @Column()
-  price: number;
+  price?: number;
 
   @Column({ default: 0 })
-  stock: number;
+  stock?: number;
 
   @ManyToOne(() => Category, (category) => category.products)
-  category: Category;
+  category?: Category;
 
   @Column({ name: 'created_at' })
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
 }

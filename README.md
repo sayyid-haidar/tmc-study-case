@@ -4,7 +4,7 @@
 
 default API-KEY is NIATIKHLA5, edit API-KEY on docker-compose.yaml
 
-```cmd
+```bash
 docker compose up
 ```
 
@@ -12,7 +12,7 @@ docker compose up
 
 before run on local, preparation .env file
 
-``` env
+```env
 MYSQL_HOST=
 MYSQL_PORT=
 MYSQL_DATABASE=
@@ -23,10 +23,16 @@ API_KEY=
 
 execuite command
 
-```cmd
+```bash
 npm install
 
 npm run migration:run
 
 npm run start
+```
+
+## Run unit test
+
+```bash
+npm run test
 ```

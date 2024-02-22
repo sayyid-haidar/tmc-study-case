@@ -1,11 +1,11 @@
 export class ProductQuery {
-  page?: number = 1;
+  ['page']?: number = 1;
 
   ['page.size']?: number = 10;
 
-  sku?: string;
+  ['sku']?: string;
 
-  name?: string;
+  ['name']?: string;
 
   ['category.id']?: number;
 

@@ -18,7 +18,7 @@ export class CategoryService {
     return this.categoryRepository.save(category);
   }
 
-  findById(id: number): Promise<Category | null> {
+  findOneById(id: number): Promise<Category | null> {
     return this.categoryRepository.findOneBy({ id: id });
   }
 }

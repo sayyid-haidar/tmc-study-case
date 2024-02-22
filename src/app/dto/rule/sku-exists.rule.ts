@@ -15,9 +15,7 @@ export class SkuExistsRule implements ValidatorConstraintInterface {
   async validate(value: string, args?: ValidationArguments): Promise<boolean> {
     let isSkuExists = false;
 
-    const product = await this.productService.findOneBy({
-      sku: value,
-    });
+    const product = await this.productService.findOneBySku(value);
     if (!product) {
       isSkuExists = true;
     }
