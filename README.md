@@ -5,7 +5,7 @@
 default API-KEY is NIATIKHLA5, edit API-KEY on docker-compose.yaml
 
 ```bash
-docker compose up
+docker compose down && docker compose up
 ```
 
 ## Run with local environment
