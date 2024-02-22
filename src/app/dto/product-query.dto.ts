@@ -1,30 +1,21 @@
-import { Expose } from 'class-transformer';
-
 export class ProductQuery {
   page?: number = 1;
 
-  @Expose({ name: 'page.size' })
-  pageSize?: number = 10;
+  ['page.size']?: number = 10;
 
   sku?: string;
 
   name?: string;
 
-  @Expose({ name: 'category.id' })
-  categoryId?: number;
+  ['category.id']?: number;
 
-  @Expose({ name: 'category.name' })
-  categoryName?: string;
+  ['category.name']?: string;
 
-  @Expose({ name: 'price.start' })
-  priceStart?: number;
+  ['price.start']?: number;
 
-  @Expose({ name: 'price.end' })
-  priceEnd?: number;
+  ['price.end']?: number;
 
-  @Expose({ name: 'stock.start' })
-  stockStart?: number;
+  ['stock.start']?: number;
 
-  @Expose({ name: 'stock.end' })
-  stockEnd?: number;
+  ['stock.end']?: number;
 }

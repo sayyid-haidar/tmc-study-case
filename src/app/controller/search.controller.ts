@@ -17,12 +17,12 @@ export class SearchController {
     const productData: [Product[], number] =
       await this.productService.findAllBy(productQuery);
 
-    const totalPage = productData[1] / productQuery.pageSize;
+    const totalPage = productData[1] / productQuery['page.size'];
 
     return new DataAndPagingResponse(
       productData[0],
       new Paging(
-        Number(productQuery.pageSize),
+        Number(productQuery['page.size']),
         Math.ceil(totalPage),
         productQuery.page,
       ),

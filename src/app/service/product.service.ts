@@ -44,7 +44,7 @@ export class ProductService {
     const queryBuilder = this.generateQueryBuilder(productQuery);
 
     return queryBuilder
-      .take(productQuery.pageSize)
+      .take(productQuery['page.size'])
       .skip(productQuery.page - 1)
       .getManyAndCount();
   }
@@ -52,6 +52,7 @@ export class ProductService {
   private generateQueryBuilder(
     productQuery: ProductQuery,
   ): SelectQueryBuilder<Product> {
+    console.log(productQuery);
     let queryBuilder = this.productRepository
       .createQueryBuilder('product')
       .leftJoinAndSelect('product.category', 'category');
@@ -66,43 +67,43 @@ export class ProductService {
         name: productQuery.name,
       });
     }
-    if (productQuery.categoryId) {
+    if (productQuery['category.id']) {
       queryBuilder = queryBuilder.where('category.id = :id', {
-        id: productQuery.categoryId,
+        id: productQuery['category.id'],
       });
     }
-    if (productQuery.categoryName) {
+    if (productQuery['category.name']) {
       queryBuilder = queryBuilder.where('category.name = :name', {
-        name: productQuery.categoryName,
+        name: productQuery['category.name'],
       });
     }
-    if (productQuery.priceStart) {
+    if (productQuery['price.start']) {
       queryBuilder = queryBuilder.where('product.price >= :priceStart', {
-        priceStart: productQuery.priceStart,
+        priceStart: productQuery['price.start'],
       });
     }
-    if (productQuery.priceEnd) {
+    if (productQuery['price.end']) {
       queryBuilder = queryBuilder.where('product.price <= :priceEnd', {
-        priceEnd: productQuery.priceEnd,
+        priceEnd: productQuery['price.end'],
       });
     }
-    if (productQuery.stockStart) {
+    if (productQuery['stock.start']) {
       queryBuilder = queryBuilder.where('product.stockStart <= :stockStart', {
-        stockStart: productQuery.stockStart,
+        stockStart: productQuery['stock.start'],
       });
     }
-    if (productQuery.stockEnd) {
+    if (productQuery['stock.end']) {
       queryBuilder = queryBuilder.where('product.stockEnd <= :stockEnd', {
-        stockEnd: productQuery.stockEnd,
+        stockEnd: productQuery['stock.end'],
       });
     }
     if (productQuery.page == null || productQuery.page < 1) {
       productQuery.page = 1;
     }
-    if (productQuery.pageSize == null) {
-      productQuery.pageSize = 10;
-    } else if (productQuery.pageSize < 1) {
-      productQuery.pageSize = 1;
+    if (productQuery['page.size'] == null) {
+      productQuery['page.size'] = 10;
+    } else if (productQuery['page.size'] < 1) {
+      productQuery['page.size'] = 1;
     }
 
     return queryBuilder;
