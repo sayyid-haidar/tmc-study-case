@@ -3,8 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {
   Between,
   FindManyOptions,
+  In,
   LessThanOrEqual,
+  Like,
   MoreThanOrEqual,
+  Or,
   Repository,
 } from 'typeorm';
 import { CategoryService } from './category.service';
@@ -53,11 +56,42 @@ export class ProductService {
         id: 'DESC',
       },
       where: {
-        sku: productQuery.sku,
-        name: productQuery.name,
+        sku: (() => {
+          if (productQuery.sku) {
+            if (typeof productQuery.sku === 'string') {
+              return productQuery.sku;
+            }
+            return In(productQuery.sku);
+          }
+        })(),
+        name: (() => {
+          if (productQuery.name) {
+            if (typeof productQuery.name === 'string') {
+              return Like(`%${productQuery.name}%`);
+            }
+            const likesName = productQuery.name.map((value) =>
+              Like(`%${value}%`),
+            );
+            return Or(...likesName);
+          }
+        })(),
         category: {
-          id: productQuery['category.id'],
-          name: productQuery['category.name'],
+          id: (() => {
+            if (productQuery['category.id']) {
+              if (typeof productQuery['category.id'] === 'number') {
+                return productQuery['category.id'];
+              }
+              return In(productQuery['category.id']);
+            }
+          })(),
+          name: (() => {
+            if (productQuery['category.name']) {
+              if (typeof productQuery['category.name'] === 'string') {
+                return productQuery['category.name'];
+              }
+              return In(productQuery['category.name']);
+            }
+          })(),
         },
         stock: (() => {
           if (productQuery['stock.start'] && productQuery['stock.end']) {

@@ -3,13 +3,13 @@ export class ProductQuery {
 
   ['page.size']?: number = 10;
 
-  ['sku']?: string;
+  ['sku']?: string[];
 
-  ['name']?: string;
+  ['name']?: string[];
 
-  ['category.id']?: number;
+  ['category.id']?: number[];
 
-  ['category.name']?: string;
+  ['category.name']?: string[];
 
   ['price.start']?: number;
 
